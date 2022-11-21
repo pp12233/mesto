@@ -1,0 +1,19 @@
+.copyright{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+  margin-top: 52px;
+  margin-bottom: 60px;
+}
+
+
+@media (max-width: 500px) {
+  .copyright{
+    margin-left: 19px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 48px;
+    margin-bottom: 36px;
+  }
+}

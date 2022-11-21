@@ -1,0 +1,7 @@
+.elements__card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin: 25px 20px 31px 21px;
+}

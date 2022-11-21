@@ -1,0 +1,25 @@
+.popup__close {
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
+
+
+@media (max-width: 500px) {
+  .popup__close {
+    right: 0;
+    top: -42px;
+  }
+  .popup__close svg {
+    width: 20px;
+  }
+}
+
+
+

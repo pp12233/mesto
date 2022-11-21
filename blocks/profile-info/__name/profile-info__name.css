@@ -1,0 +1,30 @@
+.profile-info__name{
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  color: rgba(255, 255, 255, 1);
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .profile-info__name{
+    font-size: 35px;
+    line-height: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-info__name{
+    font-size: 29px;
+    line-height: 37px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .profile-info__name{
+    font-size: 27px;
+    line-height: 32.68px;
+  }
+}

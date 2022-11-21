@@ -1,0 +1,21 @@
+.profile-info__edit-button{
+  background-image: url(../../../images/Vector.png);
+  width: 24px;
+  height: 24px;
+  border: solid 1px;
+  color:rgba(255, 255, 255, 1);
+  margin: 0 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-self: end;
+}
+
+.profile-info__edit-button:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 500px) {
+  .profile-info__edit-button{
+    margin: 0 0 0 10px;
+  }
+}
