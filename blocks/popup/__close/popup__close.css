@@ -4,6 +4,7 @@
   top: -40px;
   z-index: 2;
   cursor: pointer;
+  width: 32px;
 }
 
 .popup__close:hover {
@@ -14,12 +15,7 @@
 @media (max-width: 500px) {
   .popup__close {
     right: 0;
-    top: -42px;
-  }
-  .popup__close svg {
+    top: -40px;
     width: 20px;
   }
 }
-
-
-
