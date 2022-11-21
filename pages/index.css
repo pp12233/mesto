@@ -9,13 +9,13 @@
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__addbutton/profile__addbutton.css);
 
 @import url(../blocks/profile-info/profile-info.css);
 @import url(../blocks/profile-info/__line/profile-info__line.css);
 @import url(../blocks/profile-info/__name/profile-info__name.css);
 @import url(../blocks/profile-info/__content/profile-info__content.css);
 @import url(../blocks/profile-info/__edit-button/profile-info__edit-button.css);
-@import url(../blocks/profile-info/__addbutton/profile-info__addbutton.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);

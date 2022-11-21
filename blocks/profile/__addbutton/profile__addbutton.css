@@ -1,4 +1,4 @@
-.profile-info__addbutton{
+.profile__addbutton{
   background-image: url(../../../images/krest.png);
   color: rgba(255, 255, 255, 1);
   width: 150px;
@@ -10,20 +10,20 @@
   margin-left: auto;
 }
 
-.profile-info__addbutton:hover {
+.profile__addbutton:hover {
   opacity: 0.6;
 }
 
 
 @media (max-width: 768px) {
-  .profile-info__addbutton{
+  .profile__addbutton{
     width: calc(100% - 38px);
     margin: 28px 0 0 0;
   }
 }
 
 @media (max-width: 500px) {
-  .profile-info__addbutton{
+  .profile__addbutton{
     margin: 36px 0 0 0;
   }
 }
