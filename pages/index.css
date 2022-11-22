@@ -9,13 +9,12 @@
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__image/profile__image.css);
-@import url(../blocks/profile/__addbutton/profile__addbutton.css);
-
-@import url(../blocks/profile-info/profile-info.css);
-@import url(../blocks/profile-info/__line/profile-info__line.css);
-@import url(../blocks/profile-info/__name/profile-info__name.css);
-@import url(../blocks/profile-info/__content/profile-info__content.css);
-@import url(../blocks/profile-info/__edit-button/profile-info__edit-button.css);
+@import url(../blocks/profile/__add/profile__add.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__line/profile__line.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__content/profile__content.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
@@ -36,8 +35,7 @@
 @import url(../blocks/popup/__close/popup__close.css);
 
 @import url(../blocks/footer/footer.css);
-
-@import url(../blocks/copyright/copyright.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
 
 
 

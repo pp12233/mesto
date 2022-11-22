@@ -1,5 +1,5 @@
-.profile-info__edit-button{
-  background-image: url(../../../images/Vector.png);
+.profile__edit {
+  background-image: url(../../../images/Vector1.svg);
   width: 24px;
   height: 24px;
   border: solid 1px;
@@ -8,14 +8,20 @@
   background-repeat: no-repeat;
   background-position: center;
   align-self: end;
+  padding: 0;
+  cursor: pointer;
+  background-color: #000000;
 }
 
-.profile-info__edit-button:hover {
+.profile__edit:hover {
   opacity: 0.6;
 }
 
 @media (max-width: 500px) {
-  .profile-info__edit-button{
+  .profile__edit {
     margin: 0 0 0 10px;
+    background-size: 7.5px;
+    width: 18px;
+    height: 18px;
   }
 }

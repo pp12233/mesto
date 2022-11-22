@@ -1,17 +1,16 @@
-.profile-info{
-  min-height: 73px;
+.profile__info {
   align-self: center;
   box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
-  .profile-info{
+  .profile__info {
     max-width: calc(100% - 52px);
   }
 }
 
 @media (max-width: 500px) {
-  .profile-info{
+  .profile__info {
     max-width: calc(100% - 38px);
   }
 }

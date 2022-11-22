@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 500px) {
-  .profile__image{
+  .profile__image {
     margin: 0 0 26px 0;
     justify-self: center;
   }
