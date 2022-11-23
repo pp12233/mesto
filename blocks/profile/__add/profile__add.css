@@ -1,7 +1,7 @@
 .profile__add {
   background-image: url(../../../images/krest.svg);
   color: rgba(255, 255, 255, 1);
-  background-color: #000000;
+  background-color: transparent;
   width: 150px;
   height: 50px;
   border: solid 2px;
@@ -29,8 +29,8 @@
 
 @media (max-width: 500px) {
   .profile__add {
-    margin: 36px 0 0 0;
-    width: calc(100% - 38px);
+    margin: 34px 0 0 0;
+    width: 282px;
     background-size: 16px;
   }
 }

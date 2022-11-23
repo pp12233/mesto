@@ -9,9 +9,9 @@
   border-radius: 2px;
   border: none;
   cursor: pointer;
-  margin-top: 18px;
+  margin-top: 48px;
   transition: background-color 0.2s;
-
+  padding: 0;
 }
 
 .popup__save:hover {
@@ -20,6 +20,9 @@
 
 @media (max-width: 500px) {
   .popup__save {
-    margin-top: 15px;
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+    height: 46px;
   }
 }

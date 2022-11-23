@@ -20,5 +20,6 @@
 @media (max-width: 620px) {
   .elements__list{
     grid-template-columns: 1fr;
+    margin-top: 36px;
   }
 }

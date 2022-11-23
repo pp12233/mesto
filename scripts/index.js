@@ -11,8 +11,8 @@ likeListBtn.forEach(function(item) {
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__input_name');
-let jobInput = formElement.querySelector('.popup__input_job');
+let nameInput = formElement.querySelector('.popup__input_type_name');
+let jobInput = formElement.querySelector('.popup__input_type_job');
 
 const profileButton = document.querySelector('.profile__edit');
 const popup = document.querySelector('.popup');
@@ -23,8 +23,8 @@ const profileContent = document.querySelector('.profile__content');
 
 // открытие попапа
 function popupOpened() {
-  nameInput.value = document.querySelector('.profile__name').textContent;
-  jobInput.value = document.querySelector('.profile__content').textContent;
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileContent.textContent;
   popup.classList.add('popup_opened');
 }
 
@@ -35,7 +35,20 @@ function popupClosed() {
   popup.classList.remove('popup_opened');
 }
 
-popupCloseButton.addEventListener('click', popupClosed)
+popupCloseButton.addEventListener('click', popupClosed);
+
+
+/*
+//закрытие по клику на фон
+const closePopupByClickOverlay = function(event) {
+	if(event.target !== event.currentTarget) {
+    return;
+  }
+  popupClosed();
+}
+
+popup.addEventListener('click', closePopupByClickOverlay);
+*/
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет

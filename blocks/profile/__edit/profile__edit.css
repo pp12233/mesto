@@ -10,7 +10,7 @@
   align-self: end;
   padding: 0;
   cursor: pointer;
-  background-color: #000000;
+  background-color: transparent;
 }
 
 .profile__edit:hover {

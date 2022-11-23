@@ -1,3 +1,10 @@
 .profile__line {
   display: flex;
 }
+
+@media (max-width: 500px) {
+  .profile__line {
+    justify-content: center;
+    height: 26px;
+  }
+}
