@@ -41,10 +41,9 @@ popupCloseButton.addEventListener('click', popupClosed);
 /*
 //закрытие по клику на фон
 const closePopupByClickOverlay = function(event) {
-	if(event.target !== event.currentTarget) {
-    return;
+  if (event.target.classList.contains('popup')) {
+    popupClosed();
   }
-  popupClosed();
 }
 
 popup.addEventListener('click', closePopupByClickOverlay);

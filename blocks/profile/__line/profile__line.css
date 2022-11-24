@@ -2,9 +2,8 @@
   display: flex;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .profile__line {
     justify-content: center;
-    height: 26px;
   }
 }
