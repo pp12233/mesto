@@ -1,4 +1,4 @@
-.popup__save {
+.popup__btn {
   font-size: 18px;
   line-height: 22px;
   text-align: center;
@@ -14,12 +14,12 @@
   padding: 0;
 }
 
-.popup__save:hover {
+.popup__btn:hover {
  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media (max-width: 500px) {
-  .popup__save {
+  .popup__btn {
     margin-top: 45px;
     font-size: 14px;
     line-height: 17px;

@@ -25,59 +25,36 @@
       </section>
       <section class="elements">
         <ul class="elements__list">
-          <li class="elements__item">
-            <img src="./images/карачаевск.png" alt="Карачаевск" class="elements__image">
-              <div class="elements__card">
-              <h2 class="elements__text">Карачаевск</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="./images/гораэльбрус.png" alt="Гора-Эльбрус" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">Гора Эльбрус</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="./images/домбай.png" alt="Домбай" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">Домбай</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="./images/гораэльбрус.png" alt="Гора-Эльбрус" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">Гора Эльбрус</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="./images/домбай.png" alt="Домбай" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">Домбай</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
-          <li class="elements__item">
-            <img src="./images/карачаевск.png" alt="Карачаево-Черкессия" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">Карачаево-Черкессия</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>
+
         </ul>
       </section>
-      <div class="popup">
+      <div class="popup popup_edit">
         <div class="popup__container">
           <button type="button" class="popup__close"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form name="form" class="popup__form">
             <input type="text" name="name" id="input-name" class="popup__input popup__input_type_name" placeholder="Имя">
             <input type="text" name="job" id="input-job" class="popup__input popup__input_type_job" placeholder="О себе">
-            <button type="submit" class="popup__save">Сохранить</button>
+            <button type="submit" class="popup__btn popup__btn_save">Сохранить</button>
           </form>
+        </div>
+      </div>
+      <div class="popup popup_create">
+        <div class="popup__container">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form name="form" class="popup__form">
+            <input type="text" name="city" id="input-city" class="popup__input popup__input_type_city" placeholder="Название">
+            <input type="text" name="link" id="input-link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
+            <button type="submit" class="popup__btn popup__btn_create">Создать</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_gallery">
+        <div class="popup__background">
+          <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="изображение города" class="popup__img">
+          <button type="button" class="popup__close"></button>
+          <h4 class="popup__name">Город</h4>
         </div>
       </div>
     </main>
