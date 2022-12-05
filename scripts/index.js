@@ -27,27 +27,16 @@ const initialCards = [
 
 const elementsList = document.querySelector('.elements__list');
 const popapGallery = document.querySelector('.popup_gallery');
+const templateItemContent = document.querySelector('#mesto').content;
+const templateItem = templateItemContent.querySelector('.elements__item');
 
-
-let allTemplateString  = '';
-
-const getStrTemplateItem = function(name, link) {
-  return `<li class="elements__item">
-            <img src='./images/Trash.svg' alt='корзина' class='elements__trash'>
-            <img src="${link}" alt="Карачаевск" class="elements__image">
-            <div class="elements__card">
-              <h2 class="elements__text">${name}</h2>
-              <button type="button" class="elements__button"></button>
-            </div>
-          </li>`
-};
 
 initialCards.forEach(function(item) {
-  const cardTemplate = getStrTemplateItem(item.name, item.link);
-  allTemplateString = allTemplateString + cardTemplate;
+  const cloneTemplateItem = templateItem.cloneNode(true);
+  cloneTemplateItem.querySelector('.elements__image').src = item.link;
+  cloneTemplateItem.querySelector('.elements__text').textContent = item.name;
+  elementsList.append(cloneTemplateItem);
 });
-
-elementsList.innerHTML = allTemplateString;
 
 
 
@@ -89,28 +78,37 @@ const profileContent = document.querySelector('.profile__content');
 
 
 // открытие попапа
-function popupOpened() {
+function openPopup(win) {
+  win.classList.add('popup_opened');
+}
+
+function openEditPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileContent.textContent;
-  popupEdit.classList.add('popup_opened');
+  openPopup(popupEdit);
 }
 
-function popupCreateOpened() {
- popupCreate.classList.add('popup_opened');
+function openCreatePopup() {
+  openPopup(popupCreate);
 }
 
-profileButton.addEventListener('click', popupOpened);
-createButton.addEventListener('click', popupCreateOpened);
+profileButton.addEventListener('click', openEditPopup);
+createButton.addEventListener('click', openCreatePopup);
 
 
 // Закрытие попапа
-function popupClosed() {
-  this.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
-popupCloseButtons.forEach(btn => {
-  btn.addEventListener('click', popupClosed);
+
+popupCloseButtons.forEach((button) => {
+  // находим 1 раз ближайший к крестику попап
+  const popup = button.closest('.popup');
+  // устанавливаем обработчик закрытия на крестик
+  button.addEventListener('click', () => closePopup(popup));
 });
+
 
 /*
 //закрытие по клику на фон
@@ -145,9 +143,11 @@ function formSubmitCreateHandler (evt) {
   evt.preventDefault();
   const cityInputValue = cityInput.value;
   const linkInputValue = linkInput.value;
-  const newStrTemplate = getStrTemplateItem(cityInputValue, linkInputValue);
-  elementsList.innerHTML = elementsList.innerHTML + newStrTemplate;
-  formCreateElement.closest('.popup').classList.remove('popup_opened');
+  const cloneTemplateItem = templateItem.cloneNode(true);
+  cloneTemplateItem.querySelector('.elements__image').src = linkInputValue;
+  cloneTemplateItem.querySelector('.elements__text').textContent = cityInputValue;
+  elementsList.append(cloneTemplateItem);
+  closePopup(formCreateElement.closest('.popup'));
 }
 
 // Прикрепляем обработчик к форме:
