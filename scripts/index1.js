@@ -25,48 +25,23 @@ const initialCards = [
   }
 ];
 
-// Находим форму в DOM
-const popupEdit = document.querySelector('.popup_edit');
-const popupCreate = document.querySelector('.popup_create');
-const formElement = popupEdit.querySelector('.popup__form');
-const formCreateElement = popupCreate.querySelector('.popup__form');
-// Находим поля формы в DOM
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_job');
-
-const cityInput = formCreateElement.querySelector('.popup__input_type_city');
-const linkInput = formCreateElement.querySelector('.popup__input_type_link');
-
-const profileButton = document.querySelector('.profile__edit');
-const createButton = document.querySelector('.profile__add');
-const popupCloseButtons = document.querySelectorAll('.popup__close');
-const profileName = document.querySelector('.profile__name');
-const profileContent = document.querySelector('.profile__content');
-
 const elementsList = document.querySelector('.elements__list');
 const popapGallery = document.querySelector('.popup_gallery');
 const templateItemContent = document.querySelector('#mesto').content;
 const templateItem = templateItemContent.querySelector('.elements__item');
 
-const popapImgGallery = popapGallery.querySelector('.popup__img')
-const popupNameGallery = popapGallery.querySelector('.popup__name')
-
-
 
 initialCards.forEach(function(item) {
-  const cloneCardItem = createCard(item);
-  elementsList.append(cloneCardItem);
+  const cloneTemplateItem = templateItem.cloneNode(true);
+  cloneTemplateItem.querySelector('.elements__image').src = item.link;
+  cloneTemplateItem.querySelector('.elements__image').alt = item.name;
+  cloneTemplateItem.querySelector('.elements__text').textContent = item.name;
+  elementsList.append(cloneTemplateItem);
 });
 
-function createCard(item) {
-  // тут создаете карточку и возвращаете ее
-  const cardElement = templateItem.cloneNode(true);
-  cardElement.querySelector('.elements__image').src = item.link;
-  cardElement.querySelector('.elements__image').alt = item.name;
-  cardElement.querySelector('.elements__text').textContent = item.name;
-return cardElement
-}
 
+
+// функция смены класса кнопки лайк
 
 elementsList.addEventListener('click', function(evt) {
 if(evt.target.classList.contains('elements__button')) {
@@ -76,12 +51,31 @@ if(evt.target.classList.contains('elements__trash')) {
   evt.target.closest('.elements__item').remove();
 }
 if(evt.target.classList.contains('elements__image')) {
-  openPopup(popapGallery);
-  popapImgGallery.src=evt.target.getAttribute('src');
+  popapGallery.classList.add('popup_opened');
+  popapGallery.querySelector('.popup__img').src=evt.target.getAttribute('src');
   const titleCard = evt.target.closest('.elements__item').querySelector('.elements__text');
-  popupNameGallery.textContent = titleCard.textContent;
+  popapGallery.querySelector('.popup__name').textContent = titleCard.textContent;
 }
 });
+
+
+// Находим форму в DOM
+const popupEdit = document.querySelector('.popup_edit');
+const popupCreate = document.querySelector('.popup_create');
+let formElement = popupEdit.querySelector('.popup__form');
+let formCreateElement = popupCreate.querySelector('.popup__form');
+// Находим поля формы в DOM
+let nameInput = formElement.querySelector('.popup__input_type_name');
+let jobInput = formElement.querySelector('.popup__input_type_job');
+
+let cityInput = formCreateElement.querySelector('.popup__input_type_city');
+let linkInput = formCreateElement.querySelector('.popup__input_type_link');
+
+const profileButton = document.querySelector('.profile__edit');
+const createButton = document.querySelector('.profile__add');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
+const profileName = document.querySelector('.profile__name');
+const profileContent = document.querySelector('.profile__content');
 
 
 // открытие попапа
@@ -131,7 +125,7 @@ popup.addEventListener('click', closePopupByClickOverlay);
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-function handleProfileFormSubmit (evt) {
+function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
                                                 // Так мы можем определить свою логику отправки.
@@ -143,24 +137,23 @@ function handleProfileFormSubmit (evt) {
     profileName.textContent = nameInputValue;
     profileContent.textContent = jobInputValue;
 
-    closePopup(formElement.closest('.popup'));
+    formElement.closest('.popup').classList.remove('popup_opened');
 }
 
-function handleCreateFormSubmit (evt) {
+function formSubmitCreateHandler (evt) {
   evt.preventDefault();
   const cityInputValue = cityInput.value;
   const linkInputValue = linkInput.value;
-  const item = {
-    name: cityInputValue, link: linkInputValue
-  }
-  const cloneCardItem = createCard(item);
-  elementsList.prepend(cloneCardItem);
+  const cloneTemplateItem = templateItem.cloneNode(true);
+  cloneTemplateItem.querySelector('.elements__image').src = linkInputValue;
+  cloneTemplateItem.querySelector('.elements__text').textContent = cityInputValue;
+  elementsList.prepend(cloneTemplateItem);
   closePopup(formCreateElement.closest('.popup'));
   evt.target.reset();
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleProfileFormSubmit);
-formCreateElement.addEventListener('submit', handleCreateFormSubmit);
+formElement.addEventListener('submit', formSubmitHandler);
+formCreateElement.addEventListener('submit', formSubmitCreateHandler);
 
