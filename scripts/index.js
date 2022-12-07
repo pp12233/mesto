@@ -77,7 +77,9 @@ if(evt.target.classList.contains('elements__trash')) {
 }
 if(evt.target.classList.contains('elements__image')) {
   openPopup(popapGallery);
-  popapImgGallery.src=evt.target.getAttribute('src');
+  popapImgGallery.src = evt.target.getAttribute('src');
+  popapImgGallery.alt = evt.target.getAttribute('alt');
+
   const titleCard = evt.target.closest('.elements__item').querySelector('.elements__text');
   popupNameGallery.textContent = titleCard.textContent;
 }
