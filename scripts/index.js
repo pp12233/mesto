@@ -48,8 +48,16 @@ const popapGallery = document.querySelector('.popup_gallery');
 const templateItemContent = document.querySelector('#mesto').content;
 const templateItem = templateItemContent.querySelector('.elements__item');
 
-const popapImgGallery = popapGallery.querySelector('.popup__img')
-const popupNameGallery = popapGallery.querySelector('.popup__name')
+const popapImgGallery = popapGallery.querySelector('.popup__img');
+const popupNameGallery = popapGallery.querySelector('.popup__name');
+
+const popupEsc = document.querySelectorAll('.popup');
+
+nameInput.value = profileName.textContent;
+jobInput.value = profileContent.textContent;
+
+
+
 
 
 
@@ -92,8 +100,6 @@ function openPopup(win) {
 }
 
 function openEditPopup() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileContent.textContent;
   openPopup(popupEdit);
 }
 
@@ -119,16 +125,29 @@ popupCloseButtons.forEach((button) => {
 });
 
 
-/*
-//закрытие по клику на фон
-const closePopupByClickOverlay = function(event) {
-  if (event.target.classList.contains('popup')) {
-    popupClosed();
-  }
-}
 
-popup.addEventListener('click', closePopupByClickOverlay);
-*/
+//закрытие по клику на фон
+
+popupEsc.forEach((overlay) => {
+  overlay.addEventListener('click', function(event) {
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(overlay);
+    }
+  });
+});
+
+
+//закрытие по esc
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    if (document.querySelector('.popup_opened')) {
+      closePopup(document.querySelector('.popup_opened'));
+    }
+  }
+});
+
+
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
