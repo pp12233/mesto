@@ -34,8 +34,10 @@ const formCreateElement = popupCreate.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__input_type_name');
 const jobInput = formElement.querySelector('.popup__input_type_job');
 
+
 const cityInput = formCreateElement.querySelector('.popup__input_type_city');
 const linkInput = formCreateElement.querySelector('.popup__input_type_link');
+const popupBtnCreate = formCreateElement.querySelector('.popup__btn_create');
 
 const profileButton = document.querySelector('.profile__edit');
 const createButton = document.querySelector('.profile__add');
@@ -97,15 +99,28 @@ if(evt.target.classList.contains('elements__image')) {
 // открытие попапа
 function openPopup(win) {
   win.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function openEditPopup() {
   openPopup(popupEdit);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileContent.textContent;
 }
 
 function openCreatePopup() {
   openPopup(popupCreate);
 }
+
+//закрытие по esc
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 
 profileButton.addEventListener('click', openEditPopup);
 createButton.addEventListener('click', openCreatePopup);
@@ -114,43 +129,22 @@ createButton.addEventListener('click', openCreatePopup);
 // Закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
+// //закрытие по клику на фон и крестик
 
-popupCloseButtons.forEach((button) => {
-  // находим 1 раз ближайший к крестику попап
-  const popup = button.closest('.popup');
-  // устанавливаем обработчик закрытия на крестик
-  button.addEventListener('click', () => closePopup(popup));
-});
+popupEsc.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close')) {
+          closePopup(popup);
+        }
+    })
+})
 
-
-
-//закрытие по клику на фон
-
-popupEsc.forEach((overlay) => {
-  overlay.addEventListener('click', function(event) {
-    if (event.target.classList.contains('popup_opened')) {
-      closePopup(overlay);
-    }
-  });
-});
-
-
-//закрытие по esc
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === "Escape") {
-    if (document.querySelector('.popup_opened')) {
-      closePopup(document.querySelector('.popup_opened'));
-    }
-  }
-});
-
-
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
 
 function handleProfileFormSubmit (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
@@ -177,6 +171,8 @@ function handleCreateFormSubmit (evt) {
   const cloneCardItem = createCard(item);
   elementsList.prepend(cloneCardItem);
   closePopup(formCreateElement.closest('.popup'));
+  popupBtnCreate.setAttribute('disabled', true);
+  popupBtnCreate.classList.add('popup__btn_type_disabled');
   evt.target.reset();
 }
 
