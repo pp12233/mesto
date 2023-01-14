@@ -1,41 +1,16 @@
+import { initialCards } from "./constants.js";
 import Card from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+import { openPopup, closePopup } from "../utils/utils.js";
 
 // Находим форму в DOM
 const popupEdit = document.querySelector(".popup_edit");
 const popupCreate = document.querySelector(".popup_create");
-const formElement = popupEdit.querySelector(".popup__form");
+const formEditProfile = popupEdit.querySelector(".popup__form");
 const formCreateElement = popupCreate.querySelector(".popup__form");
 // Находим поля формы в DOM
-const nameInput = formElement.querySelector(".popup__input_type_name");
-const jobInput = formElement.querySelector(".popup__input_type_job");
+const nameInput = formEditProfile.querySelector(".popup__input_type_name");
+const jobInput = formEditProfile.querySelector(".popup__input_type_job");
 
 const cityInput = formCreateElement.querySelector(".popup__input_type_city");
 const linkInput = formCreateElement.querySelector(".popup__input_type_link");
@@ -48,23 +23,11 @@ const profileContent = document.querySelector(".profile__content");
 
 const elementsList = document.querySelector(".elements__list");
 
-
 const popupEsc = document.querySelectorAll(".popup");
 
-nameInput.value = profileName.textContent;
-jobInput.value = profileContent.textContent;
-
 initialCards.forEach(function (item) {
-  const card = new Card(item.name, item.link, "#mesto");
-  elementsList.append(card.generateCard());
+  elementsList.append(createCard(item));
 });
-
-
-// открытие попапа
-export function openPopup(win) {
-  win.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEscape);
-}
 
 function openEditPopup() {
   openPopup(popupEdit);
@@ -76,23 +39,8 @@ function openCreatePopup() {
   openPopup(popupCreate);
 }
 
-//закрытие по esc
-
-function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
-
 profileButton.addEventListener("click", openEditPopup);
 createButton.addEventListener("click", openCreatePopup);
-
-// Закрытие попапа
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeByEscape);
-}
 
 // //закрытие по клику на фон и крестик
 
@@ -119,7 +67,7 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = nameInputValue;
   profileContent.textContent = jobInputValue;
 
-  closePopup(formElement.closest(".popup"));
+  closePopup(popupEdit);
 }
 
 function handleCreateFormSubmit(evt) {
@@ -127,20 +75,20 @@ function handleCreateFormSubmit(evt) {
   const cityInputValue = cityInput.value;
   const linkInputValue = linkInput.value;
 
-  const card = new Card(cityInputValue, linkInputValue, "#mesto");
-  elementsList.prepend(card.generateCard());
-  closePopup(formCreateElement.closest(".popup"));
-  popupBtnCreate.setAttribute("disabled", true);
-  popupBtnCreate.classList.add("popup__btn_type_disabled");
+  const item = { name: cityInputValue, link: linkInputValue };
+
+  elementsList.prepend(createCard(item));
+  closePopup(popupCreate);
+  validatorAddCard.disableSubmitButton();
   evt.target.reset();
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener("submit", handleProfileFormSubmit);
+formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 formCreateElement.addEventListener("submit", handleCreateFormSubmit);
 
-const formProfile = new FormValidator(
+const validatorEditProfile = new FormValidator(
   {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
@@ -152,7 +100,7 @@ const formProfile = new FormValidator(
   popupEdit.querySelector(".popup__form")
 );
 
-const formCreate = new FormValidator(
+const validatorAddCard = new FormValidator(
   {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
@@ -164,6 +112,11 @@ const formCreate = new FormValidator(
   popupCreate.querySelector(".popup__form")
 );
 
-formProfile.enableValidation();
+validatorEditProfile.enableValidation();
 
-formCreate.enableValidation();
+validatorAddCard.enableValidation();
+
+function createCard(item) {
+  const card = new Card(item.name, item.link, "#mesto");
+  return card.generateCard();
+}
