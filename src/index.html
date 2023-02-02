@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место Россия</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
   </head>
   <body class="page">
     <header class="header">
-      <img src="./images/Vectorlogo.svg" class="header__logo" alt="логотип" />
+      <img src="<%=require('./images/Vectorlogo.svg')%>" class="header__logo" alt="логотип" />
     </header>
     <main class="container">
       <section class="profile">
         <img
-          src="./images/imagephoto.png"
+          src="<%=require('./images/imagephoto.png')%>"
           class="profile__image"
           alt="профиль"
         />
@@ -111,7 +111,7 @@
     </footer>
     <template id="mesto">
       <li class="elements__item">
-        <img src="./images/Trash.svg" alt="корзина" class="elements__trash" />
+        <img src="<%=require('./images/Trash.svg')%>" alt="корзина" class="elements__trash" />
         <img src="#" alt="#" class="elements__image" />
         <div class="elements__card">
           <h2 class="elements__text"></h2>
@@ -119,13 +119,12 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/pages/index.js" type="module"></script>
+    <!-- <script src="./scripts/pages/index.js" type="module"></script>
     <script src="./scripts/components/Card.js" type="module"></script>
     <script src="./scripts/components/FormValidator.js" type="module"></script>
     <script src="./scripts/utils/constants.js" type="module"></script>
-    <script src="./scripts/utils/utils.js" type="module"></script>
     <script src="./scripts/components/Section.js" type="module"></script>
     <script src="./scripts/components/Popup.js" type="module"></script>
-    <script src="./scripts/components/PopupWithImage.js" type="module"></script>
+    <script src="./scripts/components/PopupWithImage.js" type="module"></script> -->
   </body>
 </html>
