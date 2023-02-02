@@ -1,16 +1,11 @@
-import { openPopup } from "../utils/utils.js";
-
-const popupGallery = document.querySelector(".popup_gallery");
-const popupImgGallery = popupGallery.querySelector(".popup__img");
-const popupNameGallery = popupGallery.querySelector(".popup__name");
-
 export default class Card {
-  constructor(name, link, selector) {
+  constructor(name, link, selector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._selector = selector;
     this._image = (parent) => parent.querySelector(".elements__image");
     this._card = this._createCard();
+    this._handleCardClick = handleCardClick;
   }
 
   _createCard() {
@@ -24,10 +19,10 @@ export default class Card {
     return cardElement;
   }
 
-  _addListeners(likeButton, deleteButton, image) {
+  _addListeners(likeButton, deleteButton, imgCard) {
     likeButton.addEventListener("click", this._toggleLike);
     deleteButton.addEventListener("click", this._deleteCard);
-    image.addEventListener("click", this._showImagePopup);
+    imgCard.addEventListener("click", () => this._handleCardClick(this._name, this._link));
   }
 
   _toggleLike(evt) {
@@ -38,21 +33,13 @@ export default class Card {
     evt.target.closest(".elements__item").remove();
   }
 
-  _showImagePopup = (evt) => {
-    openPopup(popupGallery);
-
-    popupNameGallery.textContent = this._name;
-
-    popupImgGallery.src = evt.target.getAttribute("src");
-    popupImgGallery.alt = evt.target.getAttribute("alt");
-  };
 
   generateCard() {
     const likeButton = this._card.querySelector(".elements__button");
     const deleteButton = this._card.querySelector(".elements__trash");
-    const image = this._card.querySelector(".elements__image");
+    const imgCard = this._card.querySelector(".elements__image");
 
-    this._addListeners(likeButton, deleteButton, image);
+    this._addListeners(likeButton, deleteButton,imgCard);
     return this._card;
   }
 }
