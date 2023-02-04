@@ -9,7 +9,7 @@
   border-radius: 2px;
   border: none;
   cursor: pointer;
-  margin-top: 48px;
+  margin-top: 20px;
   transition: background-color 0.2s;
   padding: 0;
 }
@@ -20,7 +20,6 @@
 
 @media (max-width: 500px) {
   .popup__btn {
-    margin-top: 45px;
     font-size: 14px;
     line-height: 17px;
     height: 46px;
