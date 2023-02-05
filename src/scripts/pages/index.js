@@ -47,18 +47,18 @@ function handleCardClick(name, link) {
 }
 
 const userInfo = new UserInfo({
-  selectorName: ".profile__name",
-  selectorInfo: ".profile__content",
+  name: ".profile__name",
+  info: ".profile__content",
 });
 
 const userPopupWithForm = new PopupWithForm(".popup_edit", (obj) => {
   userInfo.setUserInfo(obj.name, obj.job)});
 userPopupWithForm.setEventListeners();
 profileButton.addEventListener("click", () => {
-  userPopupWithForm.open();
   const { name, info } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = info;
+  userPopupWithForm.open();
 });
 
 
