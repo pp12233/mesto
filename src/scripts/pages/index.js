@@ -19,10 +19,7 @@ const jobInput = formEditProfile.querySelector(".popup__input_type_job");
 const profileButton = document.querySelector(".profile__edit");
 const createButton = document.querySelector(".profile__add");
 const elementsList = document.querySelector(".elements__list");
-// const btnPopup = document.querySelector(".popup__btn");
-// const profileName = document.querySelector(".profile__name");
-// const profileContent = document.querySelector(".profile__content");
-const profileImage = document.querySelector(".profile__image_edit");
+const profileImage = document.querySelector(".profile__image-edit");
 
 const validationConfig = {
   formSelector: ".popup__form",
