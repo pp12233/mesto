@@ -16,7 +16,7 @@
     </header>
     <main class="container">
       <section class="profile">
-        <img src="" class="profile__image" alt="профиль" />
+        <img src="#" class="profile__image" alt="профиль" />
         <div class="profile__image_edit"></div>
         <div class="profile__info">
           <div class="profile__line">
@@ -109,9 +109,7 @@
         <div class="popup__container popup__container_delete-card">
           <button type="button" class="popup__close"></button>
           <h2 class="popup__title">Вы уверены?</h2>
-          <button class="popup__btn popup__btn_approval">
-            Да
-          </button>
+          <button class="popup__btn popup__btn_approval">Да</button>
         </div>
       </div>
       <div class="popup popup_avatar">
@@ -120,14 +118,14 @@
           <h2 class="popup__title">Обновить аватар</h2>
           <form name="form" class="popup__form" novalidate>
             <input
-              id="link-input"
+              id="link-avatar"
               type="url"
               name="link"
               class="popup__input popup__input_type_link"
               placeholder="Ссылка на аватар"
               required
             />
-            <span class="link-input-error popup__input-error"></span>
+            <span class="link-avatar-error popup__input-error"></span>
             <button type="submit" class="popup__btn popup__btn_avatar">
               Сохранить
             </button>
