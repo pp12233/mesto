@@ -37,8 +37,8 @@ export default class Card {
       this._cardText.textContent = this._name;
       this._card.dataset.id = this._id;
       this._addListeners();
-      this.liker();
-      this._renderTrasher();
+      this.setLikes();
+      this._checkTrasher();
     return this._card;
   }
 
@@ -47,11 +47,11 @@ export default class Card {
     return this._id
   }
 
-  _renderTrasher() {
+  _checkTrasher() {
   if (this._ownerIdCard !== this._userId) {this._cardTrash.remove()}
   }
 
-  liker() {
+  setLikes() {
     this._cardCounter.textContent = this._likes.length;
     this.clickLike();
   }
@@ -60,10 +60,9 @@ export default class Card {
     return this._likes.some((like) => like._id === this._userId);
   }
 
-  setLike(card) {
+  turnLikes(card) {
     this._likes = card.likes;
-    this._cardCounter.textContent = this._likes.length;
-    this._handleLikeButton();
+    this._cardBtn.classList.toggle("elements__button_activ");
   }
 
 
@@ -74,9 +73,5 @@ export default class Card {
     } else {
       this._cardBtn.classList.remove("elements__button_activ");
     }
-  }
-
-  _handleLikeButton() {
-    this._cardBtn.classList.toggle("elements__button_activ");
   }
 }

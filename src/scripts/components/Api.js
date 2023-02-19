@@ -4,26 +4,25 @@ export default class Api {
     this._headers = data.headers;
   }
 
+  _checkResponse(res) {
+    res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`)
+  }
+
+
 //1. Загрузка информации о пользователе с сервера
 getUserInfo() {
   return fetch(this._baseUrl + '/users/me', {
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch((err) => {
-      console.log(`Ошибка: ${err} ${res.status}`);
-    })
+    .then(this._checkResponse)
 }
 
 //2. Загрузка карточек с сервера
-getInitialCards() {
+getCards() {
   return fetch(this._baseUrl + '/cards', {
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch((err) => {
-      console.log(`Ошибка: ${err} ${res.status}`);
-    })
+    .then(this._checkResponse)
 }
 
 //3. Редактирование профиля
@@ -36,10 +35,7 @@ editingUser(data) {
       about: data.about
     })
   })
-  .then(res => res.ok ? res.json() : Promise.reject())
-  .catch((err) => {
-    console.log(`Ошибка: ${err} ${res.status}`);
-  })
+  .then(this._checkResponse)
 }
 
 //4. Добавление новой карточки
@@ -52,10 +48,7 @@ addingNewCard(data) {
       link: data.link
     })
   })
-  .then(res => res.ok ? res.json() : Promise.reject())
-  .catch((err) => {
-    console.log(`Ошибка: ${err} ${res.status}`);
-  })
+  .then(this._checkResponse)
 }
 
 //7. Удаление карточки
@@ -64,10 +57,7 @@ deletingCard(_id) {
     method: 'DELETE',
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch((err) => {
-      console.log(`Ошибка: ${err} ${res.status}`);
-    })
+    .then(this._checkResponse)
 }
 
 //8. Постановка лайка
@@ -76,10 +66,7 @@ settingLike(_id) {
     method: 'PUT',
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch((err) => {
-      console.log(`Ошибка: ${err} ${res.status}`);
-    })
+    .then(this._checkResponse)
 }
 
 //8. Снятие лайка
@@ -88,10 +75,7 @@ removingLike(_id) {
     method: 'DELETE',
     headers: this._headers
   })
-    .then(res => res.ok ? res.json() : Promise.reject())
-    .catch((err) => {
-      console.log(`Ошибка: ${err} ${res.status}`);
-    })
+    .then(this._checkResponse)
 }
 
 //9. Обновление аватара пользователя
@@ -103,9 +87,6 @@ updateAvatar(data) {
       avatar: data.link
     })
   })
-  .then(res => res.ok ? res.json() : Promise.reject())
-  .catch((err) => {
-    console.log(`Ошибка: ${err} ${res.status}`);
-  })
+  .then(this._checkResponse)
 }
 }

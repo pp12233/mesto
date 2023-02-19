@@ -7,28 +7,19 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import {
+  formEditProfile,
+  formCreateElement,
+  formEditAvatar,
+  nameInput,
+  jobInput,
+  profileButton,
+  createButton,
+  profileImage,
+  btnTextDelet,
+  validationConfig
+} from "../utils/constants.js";
 
-const popupEdit = document.querySelector(".popup_edit");
-const popupCreate = document.querySelector(".popup_create");
-const formAvatar = document.querySelector(".popup_avatar");
-const formEditProfile = popupEdit.querySelector(".popup__form");
-const formCreateElement = popupCreate.querySelector(".popup__form");
-const formEditAvatar = formAvatar.querySelector(".popup__form");
-const nameInput = formEditProfile.querySelector(".popup__input_type_name");
-const jobInput = formEditProfile.querySelector(".popup__input_type_job");
-const profileButton = document.querySelector(".profile__edit");
-const createButton = document.querySelector(".profile__add");
-const elementsList = document.querySelector(".elements__list");
-const profileImage = document.querySelector(".profile__image-edit");
-
-const validationConfig = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__btn",
-  inactiveButtonClass: "popup__btn_type_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
-};
 
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-59",
@@ -38,17 +29,12 @@ const api = new Api({
   },
 });
 
+
 const userInfo = new UserInfo({
   name: ".profile__name",
   about: ".profile__content",
   avatar: ".profile__image",
 });
-
-api.getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-  })
-  .catch((err) => console.log(err));
 
 
 function createCard(data) {
@@ -66,22 +52,28 @@ function createCard(data) {
       const result = like ? api.removingLike(id) : api.settingLike(id);
       result
         .then((data) => {
-          card.setLike(data);
-          card.liker();
+          card.turnLikes(data);
+          card.setLikes();
         })
         .catch((err) => console.log(err));
-    }
+    },
   });
-  const cardGenerate = card.generateCard();
-  cardSection.addItem(cardGenerate);
+  cardSection.appendItem(card.generateCard());
 }
 
 const cardSection = new Section({ renderer: createCard }, ".elements__list");
-api.getInitialCards()
-  .then((res) => {
-    cardSection.renderItems(res);
+
+
+Promise.all([api.getUserInfo(), api.getCards()])
+// тут деструктурируете ответ от сервера, чтобы было понятнее, что пришло
+  .then(([userData, cards]) => {
+      // тут установка данных пользователя
+      userInfo.setUserInfo(userData);
+      // и тут отрисовка карточек
+      cardSection.renderItems(cards);
   })
-  .catch((err) => console.log(err));
+  .catch(err => {console.log(err)});
+
 
 const popupWithImage = new PopupWithImage(".popup_gallery");
 popupWithImage.setEventListeners();
@@ -93,21 +85,20 @@ const popupConfirmation = new PopupWithConfirmation(
 popupConfirmation.setEventListeners();
 
 function deleteHandler(card) {
-  const btnText = document.querySelector('.popup__btn_approval').textContent;
-  document.querySelector('.popup__btn_approval').textContent = 'Удаление...';
-  api.deletingCard(card.getAttribute('data-id'));
-  popupConfirmation.close();
+  const btnText = btnTextDelet.textContent;
+  btnTextDelet.textContent = "Удаление...";
+  api.deletingCard(card.getAttribute("data-id"))
+  .then(() => {popupConfirmation.close();
   card.remove();
-  card = null;
-  document.querySelector('.popup__btn_approval').textContent = btnText;
-}
+  card = null})
+  .catch(err => console.log(err))
+  .finally(() => {btnTextDelet.textContent = btnText})}
 
-
-const userPopupWithForm = new PopupWithForm(".popup_edit", (obj) => {
-  validatorEditProfile.disableSubmitButton();
-  api.editingUser(obj)
-  .then((data) => {userInfo.setUserInfo(data)})
-  .catch((err) => {console.log(`Ошибка ${err}`)})
+const userPopupWithForm = new PopupWithForm(".popup_edit", async (obj) => {
+  try {
+    const data = await api.editingUser(obj)
+    userInfo.setUserInfo(data)
+    } catch (err) {console.log(`Ошибка ${err}`)}
 });
 userPopupWithForm.setEventListeners();
 profileButton.addEventListener("click", () => {
@@ -115,33 +106,37 @@ profileButton.addEventListener("click", () => {
   nameInput.value = name;
   jobInput.value = about;
   userPopupWithForm.open();
+  validatorEditProfile.disableSubmitButton();
 });
 
-const addPopupWithForm = new PopupWithForm(".popup_create", (obj) => {
-  validatorAddCard.disableSubmitButton();
-  api.addingNewCard(obj)
-    .then((data) => {
-      elementsList.append(createCard(data));
-    })
-    .catch((err) => {console.log(`Ошибка ${err}`)});
+const addPopupWithForm = new PopupWithForm(".popup_create", async (obj) => {
+  try {
+    const data = await api.addingNewCard(obj)
+    cardSection.prependItem(createCard(data))
+  } catch (err) {console.log(`Ошибка ${err}`)}
 });
 addPopupWithForm.setEventListeners();
 createButton.addEventListener("click", () => {
   addPopupWithForm.open();
+  validatorAddCard.disableSubmitButton();
 });
 
-const avatarPopupForm = new PopupWithForm(".popup_avatar", (obj) => {
-  validatorAvatarCard.disableSubmitButton();
-  api.updateAvatar(obj)
-  .then((data) => {userInfo.setUserInfo(data)})
-  .catch((err) => {console.log(`Ошибка ${err}`)})
-})
+const avatarPopupForm = new PopupWithForm(".popup_avatar", async (obj) => {
+  try {
+    const data = await api.updateAvatar(obj)
+    userInfo.setUserInfo(data)
+  } catch (err) {console.log(`Ошибка ${err}`)}
+});
 avatarPopupForm.setEventListeners();
 profileImage.addEventListener("click", () => {
   avatarPopupForm.open();
+  validatorAvatarCard.disableSubmitButton();
 });
 
-const validatorEditProfile = new FormValidator(validationConfig, formEditProfile);
+const validatorEditProfile = new FormValidator(
+  validationConfig,
+  formEditProfile
+);
 validatorEditProfile.enableValidation();
 
 const validatorAddCard = new FormValidator(validationConfig, formCreateElement);
