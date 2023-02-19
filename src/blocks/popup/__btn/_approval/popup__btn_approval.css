@@ -1,0 +1,11 @@
+.popup__btn_approval {
+  margin-top: 38px;
+  width: 358px;
+}
+
+
+@media (max-width: 500px) {
+  .popup__btn_approval {
+    width: 238px;
+  }
+}

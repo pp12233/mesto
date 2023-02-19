@@ -8,21 +8,22 @@
   </head>
   <body class="page">
     <header class="header">
-      <img src="<%=require('./images/Vectorlogo.svg')%>" class="header__logo" alt="логотип" />
+      <img
+        src="<%=require('./images/Vectorlogo.svg')%>"
+        class="header__logo"
+        alt="логотип"
+      />
     </header>
     <main class="container">
       <section class="profile">
-        <img
-          src="<%=require('./images/imagephoto.png')%>"
-          class="profile__image"
-          alt="профиль"
-        />
+        <img src="" class="profile__image" alt="профиль" />
+        <div class="profile__image_edit"></div>
         <div class="profile__info">
           <div class="profile__line">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__edit"></button>
           </div>
-          <p class="profile__content">Исследователь океана</p>
+          <p class="profile__content"></p>
         </div>
         <button type="button" class="profile__add"></button>
       </section>
@@ -48,7 +49,7 @@
             <input
               id="job-input"
               type="text"
-              name="job"
+              name="about"
               class="popup__input popup__input_type_job"
               placeholder="О себе"
               minlength="2"
@@ -104,17 +105,51 @@
           <h4 class="popup__name">Город</h4>
         </div>
       </div>
+      <div class="popup popup_delete-card">
+        <div class="popup__container popup__container_delete-card">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button class="popup__btn popup__btn_approval">
+            Да
+          </button>
+        </div>
+      </div>
+      <div class="popup popup_avatar">
+        <div class="popup__container popup__container_avatar">
+          <button type="button" class="popup__close"></button>
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form name="form" class="popup__form" novalidate>
+            <input
+              id="link-input"
+              type="url"
+              name="link"
+              class="popup__input popup__input_type_link"
+              placeholder="Ссылка на аватар"
+              required
+            />
+            <span class="link-input-error popup__input-error"></span>
+            <button type="submit" class="popup__btn popup__btn_avatar">
+              Сохранить
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020 Mesto Russia</p>
     </footer>
     <template id="mesto">
       <li class="elements__item">
-        <img src="<%=require('./images/Trash.svg')%>" alt="корзина" class="elements__trash" />
+        <img
+          src="<%=require('./images/Trash.svg')%>"
+          alt="корзина"
+          class="elements__trash"
+        />
         <img src="#" alt="#" class="elements__image" />
         <div class="elements__card">
           <h2 class="elements__text"></h2>
           <button type="button" class="elements__button"></button>
+          <p class="elements__counter"></p>
         </div>
       </li>
     </template>

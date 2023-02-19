@@ -1,0 +1,15 @@
+.profile__image_edit {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  border-radius: 48%;
+}
+
+.profile__image_edit:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url(../../../../images/avatarVector.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

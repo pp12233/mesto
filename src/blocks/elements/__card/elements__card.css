@@ -3,5 +3,6 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  margin: 25px 20px;
+  margin: 25px 20px 31px;
+  height: 23px;
 }
