@@ -10,19 +10,19 @@ export default class UserInfo {
     const user = {
       name: this._name.textContent,
       about: this._about.textContent,
-      avatar: this._avatar.src
+      avatar: this._avatar.src,
     };
     return user;
   }
 
   setUserInfo({ name, about, avatar, _id }) {
-    this._name.textContent = name,
-    this._about.textContent = about,
-    this._avatar.src = avatar,
-    this._userId = _id
+    (this._name.textContent = name),
+      (this._about.textContent = about),
+      (this._avatar.src = avatar),
+      (this._userId = _id);
   }
 
   getUserId() {
-    return this._userId
+    return this._userId;
   }
 }

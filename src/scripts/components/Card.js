@@ -1,5 +1,10 @@
 export default class Card {
-  constructor(data, selector, userId, { handleCardClick, handleDeleteClick, handleClickLikes }) {
+  constructor(
+    data,
+    selector,
+    userId,
+    { handleCardClick, handleDeleteClick, handleClickLikes }
+  ) {
     this._userId = userId;
     this._name = data.name;
     this._link = data.link;
@@ -27,28 +32,33 @@ export default class Card {
 
   _addListeners() {
     this._cardBtn.addEventListener("click", () => this._handleClickLikes());
-    this._cardTrash.addEventListener("click", () => this._handleDeleteClick(this._card));
-    this._cardImg.addEventListener("click", () => this._handleCardClick(this._name, this._link));
+    this._cardTrash.addEventListener("click", () =>
+      this._handleDeleteClick(this._card)
+    );
+    this._cardImg.addEventListener("click", () =>
+      this._handleCardClick(this._name, this._link)
+    );
   }
 
   generateCard() {
-      this._cardImg.src = this._link;
-      this._cardImg.alt = this._name;
-      this._cardText.textContent = this._name;
-      this._card.dataset.id = this._id;
-      this._addListeners();
-      this.setLikes();
-      this._checkTrasher();
+    this._cardImg.src = this._link;
+    this._cardImg.alt = this._name;
+    this._cardText.textContent = this._name;
+    this._card.dataset.id = this._id;
+    this._addListeners();
+    this.setLikes();
+    this._checkTrasher();
     return this._card;
   }
 
-
   getId() {
-    return this._id
+    return this._id;
   }
 
   _checkTrasher() {
-  if (this._ownerIdCard !== this._userId) {this._cardTrash.remove()}
+    if (this._ownerIdCard !== this._userId) {
+      this._cardTrash.remove();
+    }
   }
 
   setLikes() {
@@ -64,8 +74,6 @@ export default class Card {
     this._likes = card.likes;
     this._cardBtn.classList.toggle("elements__button_activ");
   }
-
-
 
   clickLike() {
     if (this.checkLike()) {

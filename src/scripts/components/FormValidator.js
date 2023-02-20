@@ -14,7 +14,7 @@ export class FormValidator {
     // Если есть хотя бы один невалидный инпут
     if (this._hasInvalidInput(this._inputList)) {
       // сделай кнопку неактивной
-      this.disableSubmitButton()
+      this.disableSubmitButton();
     } else {
       // иначе сделай кнопку активной
       this._submitButton.classList.remove(settings.inactiveButtonClass);
